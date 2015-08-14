@@ -5,23 +5,23 @@
 var Enemy = function(xPosition, yPosition, direction) {
     this.x = xPosition;
     if (direction > 0.5) {
-        direction = -1
+        direction = -1;
     } else  if (direction <= 0.5) {
-        direction = 1
+        direction = 1;
     }
     //putting the enemy on the corridor
     if (yPosition === 0) {
-        yPosition = 60
+        yPosition = 60;
     } else if (yPosition === 1) {
-        yPosition = 145
+        yPosition = 145;
     } else if (yPosition === 2) {
-        yPosition = 230
+        yPosition = 230;
     } else if (yPosition === 3) {
-        yPosition = 315
+        yPosition = 315;
     }
     //set the parameters to variables of the object
     this.y = yPosition;
-    this.direction = direction
+    this.direction = direction;
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
     this.sprite = 'images/char-pink-girl.png';
@@ -36,9 +36,9 @@ Enemy.prototype.update = function(dt) {
     // all computers.
     this.x += 20 * dt * this.direction;
     if (this.x > 450) {
-        this.x= -50
+        this.x= -50;
     } else if (this.x < -50) {
-        this.x = 450
+        this.x = 450;
     }
 };
 
@@ -66,7 +66,7 @@ Player.prototype.update = function() {
             heart.x = this.x;
             heart.y = this.y;
             //this call with a delay stops the drawing of the heart
-            setTimeout(heartTime, heartImageTime)
+            setTimeout(heartTime, heartImageTime);
         }
 
     } else if (isWin === true) {
@@ -152,7 +152,7 @@ var heartTime = function() {
  * calls function to check if game is ended*/
 var makeNewEnemy = function(round) {
     if (valueBrokenHearts < 11) {
-        var round = new Enemy(Math.floor(Math.random()*(500)-50), Math.floor(Math.random()*4), Math.random());
+        round = new Enemy(Math.floor(Math.random()*(500)-50), Math.floor(Math.random()*4), Math.random());
         allEnemies.push(round);
     }
     isGameEnd();
@@ -168,10 +168,8 @@ var isGameEnd = function() {
 };
 
 /* function to check weather the player collided with an enemy
- * checks if the x and y values of the two are close enough,
- * if so, it sets of, to draw the broken heart
- */
-
+ * it checks if the x and y values of the two are close enough,
+ * if so, it sets of, to draw the broken heart */
 function checkCollisions() {
     allEnemies.forEach(function(enemy) {
         if (enemy.x < player.x+50 && enemy.x > player.x-50) {
@@ -187,7 +185,7 @@ function checkCollisions() {
             }
         }
     });
-};
+}
 
 
 // initializing game participants
@@ -200,22 +198,21 @@ var mike = new Enemy(Math.floor(Math.random()*(500)-50), Math.floor(Math.random(
 //initializing list of enemies
 var allEnemies = [mike];
 
-//initializing some game functionalities
+// initializing some game functionalities
 isWin = false; //here i do not write the var because i want it to be used in the other js files.
 heartDraw = false;
 var heartBroken = false;
-//game values
+// game values
 var valueHearts = 0;
 var valueBrokenHearts = 0;
 // keeps count of the rounds, through which different enemies are created
 var round = 0;
-//amount of time that hearts get displayed
+// amount of time that hearts get displayed
 var heartImageTime = 600;
 
 
-
-// This listens for key presses and sends the keys to your
-// Player.handleInput() method. You don't need to modify this.
+// This listens for key presses and sends the keys to the
+// Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
     var allowedKeys = {
         37: 'left',
