@@ -1,0 +1,60 @@
+hello!
+
+answers to previous reviewer that might be useful to the new reviewer!
+
+### PROJECT 3, review 1-2
+
+
+Aiaia! wanted to do last minute slimming of project, and deleted images
+ in the folder, without rechecking and remembering that they are present
+ in the load code, so I apologize for this.
+
+Did a few little suggested corrections, tried to catch the missing semicolons.
+Refreshed my sublime settings (the tab vs indented spaces, that might look
+the same for the eye, but actually show up differently on the review code.)
+
+
+A few more precise questions/comments:
+
+**index.html vs game.html**
+I got the suggestion to rename my html file back to index.html from game.html.
+I read a bit about it, and if i understood correctly it is because in some
+cases index.html is automatically looked for.
+If I am planning to add game.html to a project with many pages, it is than
+better it stays called game.html? only in case it is the main page file,
+does it make sense to call it index.html? in this case then, if it is the
+only file, it would be handy to call it index.html.
+I still felt like leaving it to be game.html, but i am up for changing my opinion.
+
+
+**About inheritance.**
+The previous reviewer suggested that I do some OOP including inheritance,
+but it is a bit confusing for me. So please, if you could I'd be happy if you
+could check what I did in my code.
+If I understood correctly, the only thing that my three "creature" types
+have in common, is that they need to be drawn. (all other things differ a
+bit, and so I did not feel I could put them more together),
+There is also this strange empty function at the beginning. Does this make
+sense or what should I do?
+
+
+**About the use of "use strict";**
+Well, the previous reviewer proposed I add "use strict"; to my code.
+I looked around for some info, and it is not that I understood it much,
+but a bit, so I tried to implement it. I put it in every function, and
+the code seems to still work. If you have an easy explanation I'd be happy
+to hear.
+
+**Validator errors**
+There are very many validator errors.
+Some are about variables without the var, which I am doing on purpose
+because I want them to be accesible from other files.
+Then there is the "unexpected this" error that I do not know what to do about.
+basically, if they are there, chances are high, I do not know what to do about them,
+so tips welcome  : )
+
+
+Thank you for your time and effort!
+Getting comments about my code is really important for me : )
+
+

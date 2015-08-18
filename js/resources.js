@@ -5,6 +5,7 @@
  * to load the same image multiple times.
  */
 (function() {
+    "use strict";
     var resourceCache = {};
     var loading = [];
     var readyCallbacks = [];
@@ -14,12 +15,14 @@
      * image. It will then call our private image loading function accordingly.
      */
     function load(urlOrArr) {
+        "use strict";
         if(urlOrArr instanceof Array) {
             /* If the developer passed in an array of images
              * loop through each value and call our image
              * loader on that image file
              */
             urlOrArr.forEach(function(url) {
+                "use strict";
                 _load(url);
             });
         } else {
@@ -35,6 +38,7 @@
      * called by the public image loader function.
      */
     function _load(url) {
+        "use strict";
         if(resourceCache[url]) {
             /* If this URL has been previously loaded it will exist within
              * our resourceCache array. Just return that image rather
@@ -57,7 +61,7 @@
                  * call all of the onReady() callbacks we have defined.
                  */
                 if(isReady()) {
-                    readyCallbacks.forEach(function(func) { func(); });
+                    readyCallbacks.forEach(function(func) {"use strict"; func(); });
                 }
             };
 
@@ -75,6 +79,7 @@
      * the same as calling load() on that URL.
      */
     function get(url) {
+        "use strict";
         return resourceCache[url];
     }
 
@@ -82,8 +87,9 @@
      * for loading have in fact been completed loaded.
      */
     function isReady() {
+        "use strict";
         var ready = true;
-        for(var k in resourceCache) {
+        for (var k in resourceCache) {
             if(resourceCache.hasOwnProperty(k) &&
                !resourceCache[k]) {
                 ready = false;
@@ -96,6 +102,7 @@
      * when all requested images are properly loaded.
      */
     function onReady(func) {
+        "use strict";
         readyCallbacks.push(func);
     }
 

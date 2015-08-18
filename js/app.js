@@ -2,7 +2,21 @@
  * depending on parmeters given at random, it sets the direction
  * as well the position of the enemy
  */
+
+//Initialize the creature "mother" class of all the moving elements I draw
+var Creature = function() {
+    "use strict";
+};
+
+// Draws the creature on the screen
+Creature.prototype.render = function() {
+    "use strict";
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
+// making the class of enemy with its variables
 var Enemy = function(xPosition, yPosition, direction) {
+    "use strict";
     this.x = xPosition;
     if (direction > 0.5) {
         direction = -1;
@@ -26,11 +40,14 @@ var Enemy = function(xPosition, yPosition, direction) {
     // a helper we've provided to easily load images
     this.sprite = 'images/char-pink-girl.png';
 };
+// create an Enemy object as object of the Creature class
+Enemy.prototype = Object.create(Creature.prototype);
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 // keeps the enemies in motion, and wraps them on the screen
 Enemy.prototype.update = function(dt) {
+    "use strict";
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -42,21 +59,21 @@ Enemy.prototype.update = function(dt) {
     }
 };
 
-// Draws the enemy on the screen
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
 
 // making the class of player with its variables
 var Player = function (){
+    "use strict";
     this.sprite = 'images/char-boy.png';
     this.x = 200;
     this.y = 400;
 };
 
+Player.prototype = Object.create(Creature.prototype);
+
 /* the function draws and gives the player a heart when reaching the water
  * if game is won, it allows the player to navigate around the water*/
 Player.prototype.update = function() {
+    "use strict";
     if (isWin === false) {
         if (this.y <  20) {
             // makes a new instance of heart
@@ -68,7 +85,6 @@ Player.prototype.update = function() {
             //this call with a delay stops the drawing of the heart
             setTimeout(heartTime, heartImageTime);
         }
-
     } else if (isWin === true) {
         if (this.y <  0) {
             this.y = 438;
@@ -84,6 +100,7 @@ Player.prototype.update = function() {
 
 //function, moves player depending on key pressed
 Player.prototype.handleInput = function(key) {
+    "use strict";
     if (valueBrokenHearts < 10) {
         if (key === 'left') {
             if (this.x > -10) {
@@ -105,13 +122,9 @@ Player.prototype.handleInput = function(key) {
     }
 };
 
-// Draws the player on the screen:
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
-
 // Function sets as this.sprite the heart the game needs
 var Heart = function (){
+    "use strict";
     if (heartBroken === true){
         this.sprite = 'images/Heart-broken.png';
     } else {
@@ -119,15 +132,13 @@ var Heart = function (){
     }
 };
 
-// Draws the heart on the screen:
-Heart.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+Heart.prototype = Object.create(Creature.prototype);
 
 /* function that puts player back on the first line,
  * stops hearts from being drawn, increases the round,
  * and calls the function to make new enemies*/
 var heartTime = function() {
+    "use strict";
     player.y = 400;
     if (heartBroken === true) {
         valueBrokenHearts += 1;
@@ -151,6 +162,7 @@ var heartTime = function() {
 /* functions creates new enemy,
  * calls function to check if game is ended*/
 var makeNewEnemy = function(round) {
+    "use strict";
     if (valueBrokenHearts < 11) {
         round = new Enemy(Math.floor(Math.random()*(500)-50), Math.floor(Math.random()*4), Math.random());
         allEnemies.push(round);
@@ -160,6 +172,7 @@ var makeNewEnemy = function(round) {
 
 /* check if game is ended, either lost or won. inform the player or the code*/
 var isGameEnd = function() {
+    "use strict";
     if (valueBrokenHearts > 9) {
         document.getElementById('game-end').innerHTML = 'your heart <br>is broken';
     } else if (valueHearts > 9){
@@ -171,9 +184,12 @@ var isGameEnd = function() {
  * it checks if the x and y values of the two are close enough,
  * if so, it sets of, to draw the broken heart */
 function checkCollisions() {
+    "use strict";
     allEnemies.forEach(function(enemy) {
-        if (enemy.x < player.x+50 && enemy.x > player.x-50) {
-            if (enemy.y < player.y+41 && enemy.y > player.y-41) {
+        if (enemy.x < player.x+50 &&
+            enemy.x > player.x-50 &&
+            enemy.y < player.y+41 &&
+            enemy.y > player.y-41) {
                 heart = new Heart();
                 heartBroken = true;
                 heartDraw = true;
@@ -182,14 +198,13 @@ function checkCollisions() {
                 heart.y = player.y;
                 //call the end of the heart drawing after the delay
                 setTimeout(heartTime, heartImageTime);
-            }
         }
     });
 }
 
-
 // initializing game participants
 var player = new Player();
+
 // first enemy, that appears at page load
 var mike = new Enemy(Math.floor(Math.random()*(500)-50), Math.floor(Math.random()*4), Math.round(Math.random()));
 // one enemy for easy debugging
@@ -201,6 +216,7 @@ var allEnemies = [mike];
 // initializing some game functionalities
 isWin = false; //here i do not write the var because i want it to be used in the other js files.
 heartDraw = false;
+heart = false;
 var heartBroken = false;
 // game values
 var valueHearts = 0;
@@ -211,9 +227,12 @@ var round = 0;
 var heartImageTime = 600;
 
 
+
+
 // This listens for key presses and sends the keys to the
 // Player.handleInput() method.
 document.addEventListener('keyup', function(e) {
+    "use strict";
     var allowedKeys = {
         37: 'left',
         38: 'up',
