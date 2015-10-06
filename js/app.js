@@ -20,7 +20,7 @@ var Enemy = function(xPosition, yPosition, direction) {
     this.x = xPosition;
     if (direction > 0.5) {
         direction = -1;
-    } else  if (direction <= 0.5) {
+    } else if (direction <= 0.5) {
         direction = 1;
     }
     //putting the enemy on the corridor
@@ -231,7 +231,7 @@ var heartImageTime = 600;
 
 // This listens for key presses and sends the keys to the
 // Player.handleInput() method.
-document.addEventListener('keyup', function(e) {
+document.addEventListener('keydown', function(e) {
     "use strict";
     var allowedKeys = {
         37: 'left',
